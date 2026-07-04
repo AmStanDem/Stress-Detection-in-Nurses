@@ -1,0 +1,27 @@
+# Virtual Environment
+.venv/
+venv/
+ENV/
+
+# Python Cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints/
+
+# Generated E4/Model Outputs
+hr_new.csv
+predDF.csv
+predSVMDF.csv
+pred{user}.csv
+pred*.csv
+
+# JetBrains / VS Code Configs
+.idea/
+.vscode/
+
+# Local Python Version
+.python-version
