@@ -6,6 +6,7 @@ and TimeSeriesSplit cross-validation to prevent data leakage from temporal overl
 """
 
 import pandas as pd
+from sklearn.calibration import CalibratedClassifierCV
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report
 from sklearn.model_selection import TimeSeriesSplit
@@ -41,8 +42,8 @@ def evaluate_model_cv(
         X_train, X_test = X.iloc[train_idx], X.iloc[test_idx]
         y_train, y_test = y.iloc[train_idx], y.iloc[test_idx]
 
-        model.fit(X_train, y_train.values.ravel())
-        score = model.score(X_test, y_test.values.ravel())
+        model.fit(X_train, y_train.to_numpy().ravel())
+        score = model.score(X_test, y_test.to_numpy().ravel())
         scores.append(score)
 
     return scores
@@ -73,13 +74,13 @@ def train_and_evaluate_all(
     X_train, X_test = features.iloc[:split_idx], features.iloc[split_idx:]
     y_train, y_test = labels.iloc[:split_idx], labels.iloc[split_idx:]
 
-    y_train_flat = y_train.values.ravel()
-    y_test_flat = y_test.values.ravel()
+    y_train_flat = y_train.to_numpy().ravel()
+    y_test_flat = y_test.to_numpy().ravel()
 
     models = {
         "RF": RandomForestClassifier(n_estimators=100, max_depth=15, random_state=30),
         "KNN": KNeighborsClassifier(n_neighbors=5),
-        "SVM": SVC(probability=True, random_state=30),
+        "SVM": CalibratedClassifierCV(SVC(random_state=30), ensemble=False),
     }
 
     trained_models = {}
