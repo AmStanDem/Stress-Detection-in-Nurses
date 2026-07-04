@@ -78,9 +78,9 @@ def train_and_evaluate_all(
     y_test_flat = y_test.to_numpy().ravel()
 
     models = {
-        "RF": RandomForestClassifier(n_estimators=100, max_depth=15, random_state=30),
+        "RF": RandomForestClassifier(n_estimators=150, max_depth=15, class_weight="balanced", random_state=30),
         "KNN": KNeighborsClassifier(n_neighbors=5),
-        "SVM": CalibratedClassifierCV(SVC(random_state=30), ensemble=False),
+        "SVM": SVC(class_weight="balanced", random_state=30),
     }
 
     trained_models = {}
