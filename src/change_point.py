@@ -26,7 +26,7 @@ def detect_change_points(predictions: pd.Series, penalty: float = 10.0) -> list[
     list[int]
         List of change point indices, starting with 0.
     """
-    signal = predictions.values.reshape(-1)
+    signal = predictions.to_numpy().reshape(-1)
     algo = rpt.Pelt(model="l2").fit(signal)
     result = algo.predict(pen=penalty)
     return [0] + result

@@ -116,9 +116,9 @@ def extract_window_features(
     ]
 
     features_list = []
-    eda_vals = df_aligned["EDA"].values
-    hr_vals = df_aligned["HR"].values
-    temp_vals = df_aligned["temp"].values
+    eda_vals = df_aligned["EDA"].to_numpy()
+    hr_vals = df_aligned["HR"].to_numpy()
+    temp_vals = df_aligned["temp"].to_numpy()
 
     for i in range(0, len(df_aligned), step):
         if i + window_size > len(df_aligned):
