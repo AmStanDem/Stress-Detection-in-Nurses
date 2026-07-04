@@ -16,10 +16,10 @@ from pathlib import Path
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 
-from data_processing import align_signals, create_lag_features, load_e4_csv
-from features import extract_window_features
-from models import train_and_evaluate_all
-from change_point import classify_and_merge_segments, detect_change_points
+from src.data_processing import align_signals, create_lag_features, load_e4_csv
+from src.features import extract_window_features
+from src.models import train_and_evaluate_all
+from src.change_point import classify_and_merge_segments, detect_change_points
 
 
 def main() -> None:
